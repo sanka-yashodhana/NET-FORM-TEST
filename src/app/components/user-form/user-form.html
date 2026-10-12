@@ -1,0 +1,349 @@
+<div class="form-container">
+  <!-- Card Header -->
+  <div class="form-header">
+    <div class="header-icon-box">
+      <svg *ngIf="!userService.selectedUserForEdit()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <line x1="19" y1="8" x2="19" y2="14"></line>
+        <line x1="22" y1="11" x2="16" y2="11"></line>
+      </svg>
+      <svg *ngIf="userService.selectedUserForEdit()" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h2>{{ userService.selectedUserForEdit() ? 'Edit User Record' : 'Register New User' }}</h2>
+      <p>{{ userService.selectedUserForEdit() ? 'Modify and update the existing user details in the .NET database' : 'Fill in the required information to post the record to the .NET REST API' }}</p>
+    </div>
+    <span *ngIf="userService.selectedUserForEdit()" class="badge edit-badge">
+      Edit Mode Active (ID: {{ userService.selectedUserForEdit()?.id }})
+    </span>
+  </div>
+
+  <!-- Reactive Form -->
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate class="user-reactive-form">
+    
+    <!-- Grid Row 1: First Name & Last Name -->
+    <div class="form-row-2">
+      <div class="form-group" [class.has-error]="isFieldInvalid('firstName')">
+        <label for="firstName">
+          First Name <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <input
+            id="firstName"
+            type="text"
+            formControlName="firstName"
+            placeholder="e.g. John"
+            autocomplete="given-name"
+          />
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('firstName')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ getErrorMessage('firstName') }}
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="isFieldInvalid('lastName')">
+        <label for="lastName">
+          Last Name <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+            placeholder="e.g. Doe"
+            autocomplete="family-name"
+          />
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('lastName')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ getErrorMessage('lastName') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid Row 2: Email & Birthday -->
+    <div class="form-row-2">
+      <div class="form-group" [class.has-error]="isFieldInvalid('email')">
+        <label for="email">
+          Email Address <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="john.doe@company.com"
+            autocomplete="email"
+          />
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('email')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="isFieldInvalid('birthday')">
+        <label for="birthday">
+          Birthday <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <input
+            id="birthday"
+            type="date"
+            formControlName="birthday"
+          />
+        </div>
+        <div class="error-msg" *ngIf="isFieldInvalid('birthday')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ getErrorMessage('birthday') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Location Field with Pop Up Drop Down Menu -->
+    <div class="form-group location-group" [class.has-error]="isFieldInvalid('location')">
+      <label for="locationTrigger">
+        Location (Pop Up Dropdown) <span class="required-star">*</span>
+      </label>
+      
+      <div class="location-trigger-box" (click)="toggleLocationDropdown()">
+        <div class="location-current">
+          <svg class="input-icon-loc" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span [class.placeholder-text]="!userForm.get('location')?.value">
+            {{ userForm.get('location')?.value || 'Click to choose location from popup menu...' }}
+          </span>
+        </div>
+        <div class="dropdown-chevron" [class.open]="isLocationDropdownOpen">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Pop Up Dropdown Modal Menu -->
+      <div class="location-popup-panel" *ngIf="isLocationDropdownOpen">
+        <div class="popup-panel-header">
+          <div class="popup-search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              placeholder="Search city or country..."
+              [(ngModel)]="locationSearchQuery"
+              [ngModelOptions]="{standalone: true}"
+              (click)="$event.stopPropagation()"
+            />
+          </div>
+          <button type="button" class="close-popup-btn" (click)="closeLocationDropdown()">
+            &times;
+          </button>
+        </div>
+
+        <div class="location-list">
+          <div
+            *ngFor="let loc of filteredLocations"
+            class="location-option"
+            [class.selected]="userForm.get('location')?.value === loc"
+            (click)="selectLocation(loc)"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>{{ loc }}</span>
+            <span *ngIf="userForm.get('location')?.value === loc" class="check-mark">✓</span>
+          </div>
+          <div *ngIf="filteredLocations.length === 0" class="no-loc-match">
+            No locations matched. You can type a custom location below.
+          </div>
+        </div>
+
+        <!-- Custom location input in popup -->
+        <div class="custom-loc-row" (click)="$event.stopPropagation()">
+          <input
+            type="text"
+            placeholder="Type custom location..."
+            [(ngModel)]="customLocationInput"
+            [ngModelOptions]="{standalone: true}"
+            (keyup.enter)="applyCustomLocation()"
+          />
+          <button type="button" class="btn-sm-loc" (click)="applyCustomLocation()">Add</button>
+        </div>
+      </div>
+
+      <div class="error-msg" *ngIf="isFieldInvalid('location')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        {{ getErrorMessage('location') }}
+      </div>
+    </div>
+
+    <!-- Gender (Radio Buttons) -->
+    <div class="form-group" [class.has-error]="isFieldInvalid('gender')">
+      <label>
+        Gender <span class="required-star">*</span>
+      </label>
+      <div class="gender-radio-group">
+        <label class="radio-card" [class.selected]="userForm.get('gender')?.value === 'Male'">
+          <input
+            type="radio"
+            formControlName="gender"
+            value="Male"
+          />
+          <span class="custom-radio"></span>
+          <span class="radio-label">Male</span>
+        </label>
+
+        <label class="radio-card" [class.selected]="userForm.get('gender')?.value === 'Female'">
+          <input
+            type="radio"
+            formControlName="gender"
+            value="Female"
+          />
+          <span class="custom-radio"></span>
+          <span class="radio-label">Female</span>
+        </label>
+
+        <label class="radio-card" [class.selected]="userForm.get('gender')?.value === 'Other'">
+          <input
+            type="radio"
+            formControlName="gender"
+            value="Other"
+          />
+          <span class="custom-radio"></span>
+          <span class="radio-label">Other / Non-Binary</span>
+        </label>
+      </div>
+      <div class="error-msg" *ngIf="isFieldInvalid('gender')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        {{ getErrorMessage('gender') }}
+      </div>
+    </div>
+
+    <!-- Using Technologies (Checkboxes) -->
+    <div class="form-group" [class.has-error]="isFieldInvalid('technologies')">
+      <div class="tech-label-row">
+        <label>
+          Using Technologies (Select at least 1) <span class="required-star">*</span>
+        </label>
+        <span class="tech-hint">Skills & Tech Stack</span>
+      </div>
+
+      <div class="tech-checkbox-grid" formArrayName="technologies">
+        <label
+          *ngFor="let tech of technologyList; let i = index"
+          class="checkbox-card"
+          [class.active]="technologiesFormArray.at(i).value"
+        >
+          <input
+            type="checkbox"
+            [formControlName]="i"
+          />
+          <span class="custom-checkbox">
+            <svg *ngIf="technologiesFormArray.at(i).value" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </span>
+          <span class="tech-name">{{ tech }}</span>
+        </label>
+      </div>
+
+      <div class="error-msg" *ngIf="isFieldInvalid('technologies')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        {{ getErrorMessage('technologies') }}
+      </div>
+    </div>
+
+    <!-- Form Action Buttons -->
+    <div class="form-actions">
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="isSubmitting"
+      >
+        <span *ngIf="isSubmitting" class="spinner"></span>
+        <svg *ngIf="!isSubmitting" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+        <span>
+          {{ isSubmitting ? 'Posting...' : (userService.selectedUserForEdit() ? 'Update User Record' : 'Submit & Post to .NET API') }}
+        </span>
+      </button>
+
+      <button
+        *ngIf="userService.selectedUserForEdit()"
+        type="button"
+        class="btn-secondary"
+        (click)="cancelEdit()"
+      >
+        Cancel Edit
+      </button>
+
+      <button
+        *ngIf="!userService.selectedUserForEdit()"
+        type="button"
+        class="btn-ghost"
+        (click)="resetForm()"
+      >
+        Reset Form
+      </button>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,186 @@
+<div class="app-layout">
+  
+  <!-- Global Toast Alerts -->
+  <div class="toast-container" *ngIf="userService.successMessage() || userService.errorMessage()">
+    <div *ngIf="userService.successMessage()" class="toast toast-success">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+      <span>{{ userService.successMessage() }}</span>
+      <button type="button" class="toast-close" (click)="userService.clearNotifications()">&times;</button>
+    </div>
+
+    <div *ngIf="userService.errorMessage()" class="toast toast-error">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>{{ userService.errorMessage() }}</span>
+      <button type="button" class="toast-close" (click)="userService.clearNotifications()">&times;</button>
+    </div>
+  </div>
+
+  <!-- Header Navigation Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <h1>Enterprise User Hub</h1>
+          <span class="brand-subtitle">Angular Reactive Forms &amp; .NET REST API</span>
+        </div>
+      </div>
+
+      <!-- API Status & Config Trigger -->
+      <div class="header-actions">
+        <button
+          type="button"
+          class="api-status-btn"
+          [class.connected]="userService.isApiConnected()"
+          [class.fallback]="userService.isUsingLocalFallback()"
+          (click)="openApiConfig()"
+          title="Click to configure .NET API Endpoint"
+        >
+          <span class="status-indicator"></span>
+          <div class="status-labels">
+            <span class="status-text">
+              {{ userService.isApiConnected() ? '.NET API Online' : 'Local Persistence Mode' }}
+            </span>
+            <span class="status-url">{{ userService.apiUrl() }}</span>
+          </div>
+          <svg class="gear-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- TWO-TAB NAVIGATION BAR -->
+    <nav class="tabs-nav-bar" aria-label="Main Navigation">
+      
+      <!-- Tab 1: Registration Form -->
+      <button
+        type="button"
+        class="tab-btn"
+        [class.active]="userService.activeTab() === 'form'"
+        (click)="userService.setActiveTab('form')"
+      >
+        <div class="tab-btn-content">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          <span class="tab-title">Tab 1: Registration Form</span>
+        </div>
+        <span *ngIf="userService.selectedUserForEdit()" class="tab-pill-badge edit">
+          Editing ID #{{ userService.selectedUserForEdit()?.id }}
+        </span>
+      </button>
+
+      <!-- Tab 2: User Records / Data View -->
+      <button
+        type="button"
+        class="tab-btn"
+        [class.active]="userService.activeTab() === 'list'"
+        (click)="userService.setActiveTab('list')"
+      >
+        <div class="tab-btn-content">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span class="tab-title">Tab 2: User Records &amp; Directory</span>
+        </div>
+        <span class="tab-pill-badge count">
+          {{ userService.users().length }}
+        </span>
+      </button>
+
+    </nav>
+
+    <!-- TAB 1 CONTENT -->
+    <section *ngIf="userService.activeTab() === 'form'" class="tab-panel">
+      <app-user-form></app-user-form>
+    </section>
+
+    <!-- TAB 2 CONTENT -->
+    <section *ngIf="userService.activeTab() === 'list'" class="tab-panel">
+      <app-user-list></app-user-list>
+    </section>
+
+  </main>
+
+  <!-- MODAL: API URL CONFIGURATION -->
+  <div *ngIf="isApiConfigOpen()" class="modal-backdrop" (click)="closeApiConfig()">
+    <div class="modal-card config-modal" (click)="$event.stopPropagation()">
+      <div class="config-modal-header">
+        <div class="config-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        </div>
+        <div>
+          <h3>.NET API Endpoint Configuration</h3>
+          <p class="config-sub">Configure the REST API base URL for POST, GET, PUT &amp; DELETE operations</p>
+        </div>
+      </div>
+
+      <div class="config-input-group">
+        <label for="apiUrlInput">API Endpoint URL:</label>
+        <input
+          id="apiUrlInput"
+          type="text"
+          [ngModel]="customApiUrlInput()"
+          (ngModelChange)="customApiUrlInput.set($event)"
+          placeholder="http://localhost:5000/api/users"
+          class="url-input"
+        />
+      </div>
+
+      <div class="presets-section">
+        <span class="presets-label">Common Localhost Presets:</span>
+        <div class="presets-pills">
+          <button type="button" class="preset-pill" (click)="resetApiToDefault('http://localhost:5000/api/users')">
+            http://localhost:5000/api/users
+          </button>
+          <button type="button" class="preset-pill" (click)="resetApiToDefault('https://localhost:7123/api/users')">
+            https://localhost:7123/api/users
+          </button>
+          <button type="button" class="preset-pill" (click)="resetApiToDefault('http://localhost:5242/api/users')">
+            http://localhost:5242/api/users
+          </button>
+        </div>
+      </div>
+
+      <div class="config-note">
+        <p>
+          💡 <strong>Offline / Standalone Support:</strong> If your .NET API is not currently running, the app automatically runs in local storage simulation mode, so all features (Form validation, POST, GET, Edit, Delete, Search) are 100% functional for evaluation.
+        </p>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-modal-cancel" (click)="closeApiConfig()">Cancel</button>
+        <button type="button" class="btn-primary" (click)="saveApiConfig()">Save &amp; Test Connection</button>
+      </div>
+    </div>
+  </div>
+
+</div>
