@@ -1,12 +1,12 @@
 .form-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(20, 28, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-xl);
   padding: 36px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
   position: relative;
   overflow: visible;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 }
 
 .form-header {

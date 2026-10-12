@@ -6,15 +6,16 @@
 
 /* Top Controls Card */
 .top-controls-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(20, 28, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-xl);
   padding: 20px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
   flex-wrap: wrap;
 }
 
@@ -228,11 +229,12 @@
 
 /* Table View */
 .table-responsive {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(20, 28, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-xl);
   overflow-x: auto;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(16px);
 }
 
 .users-table {
@@ -452,14 +454,15 @@
 }
 
 .user-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(20, 28, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-xl);
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 

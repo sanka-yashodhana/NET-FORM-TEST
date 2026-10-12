@@ -1,584 +1,263 @@
-.aviation-portal {
+/* Blended Airplane Scenic Theme */
+.airplane-bg-wrapper {
   min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-image: url('/jet_hero.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-app);
 }
 
-/* 1. TOP UTILITY BAR (Matches screenshot) */
-.top-utility-bar {
-  background: #192231;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.8rem;
-  color: #c4d1e2;
+/* Semi-transparent dark sunset vignette overlay for optimal contrast */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 20, 31, 0.45) 0%,
+    rgba(14, 20, 31, 0.75) 45%,
+    rgba(14, 20, 31, 0.92) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main-shell {
   position: relative;
-  z-index: 60;
+  z-index: 10;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.utility-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 8px 24px;
+/* Floating Header Pill: Blended directly with Airplane Sky */
+.floating-header {
+  background: rgba(22, 31, 46, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px);
+  padding: 14px 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.utility-left {
-  display: flex;
-  align-items: center;
   gap: 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+  flex-wrap: wrap;
 }
 
-.contact-link {
+.brand-crest {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #b0c4de;
-  text-decoration: none;
-  transition: color var(--transition-fast);
+  gap: 16px;
 }
 
-.contact-link:hover {
+.crest-logo {
+  font-family: 'Caveat', 'Playfair Display', cursive, sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
   color: #ffffff;
+  background: linear-gradient(135deg, #182232, #0f1624);
+  border: 1px solid rgba(229, 179, 88, 0.5);
+  padding: 2px 14px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.utility-right {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+.brand-text h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
 }
 
-.location-text {
-  color: #cbd5e1;
-  font-size: 0.82rem;
+.sub-flight {
+  font-size: 0.78rem;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.social-icons {
-  display: flex;
+/* API Status Indicator Pill */
+.api-status-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  padding: 8px 16px;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-}
-
-.soc-icon {
-  color: #94a3b8;
-  cursor: pointer;
-  font-size: 0.85rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  transition: all var(--transition-fast);
-}
-
-.soc-icon:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* API Status Indicator Badge */
-.api-status-badge {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
-  padding: 3px 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   color: #cbd5e1;
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-.api-status-badge:hover {
+.api-status-pill:hover {
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
 }
 
-.status-dot {
-  width: 7px;
-  height: 7px;
+.pulse-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #f59e0b;
 }
 
-.api-status-badge.connected .status-dot {
+.api-status-pill.connected .pulse-dot {
   background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+  box-shadow: 0 0 10px #10b981;
 }
 
-.api-status-badge.fallback .status-dot {
+.api-status-pill.fallback .pulse-dot {
   background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
 }
 
-/* 2. MAIN NAVIGATION (Ice-Blue Bar with Center Downward Triangle Crest) */
-.jet-main-nav {
-  background: #cde0ef;
-  background: linear-gradient(180deg, #d8e7f3 0%, #c5d9ec 100%);
-  border-bottom: 2px solid #b3ccdf;
-  position: relative;
-  z-index: 50;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+.status-name {
+  font-weight: 600;
 }
 
-.nav-container {
-  max-width: 1320px;
-  margin: 0 auto;
+.gear {
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+/* TWO-TAB NAVIGATION BAR BLENDED WITH AIRPLANE BACKDROP */
+.blended-tabs-nav {
+  display: flex;
+  gap: 16px;
+  background: rgba(18, 26, 40, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-xl);
+  padding: 8px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.tab-glass-btn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: 16px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  position: relative;
-  height: 64px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  padding: 0;
-  margin: 0;
-}
-
-.left-links {
-  justify-content: flex-end;
-  flex: 1;
-  padding-right: 70px;
-}
-
-.right-links {
-  justify-content: flex-start;
-  flex: 1;
-  padding-left: 70px;
-}
-
-.nav-item {
-  color: #1a2a40;
-  font-weight: 700;
-  font-size: 0.88rem;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: color var(--transition-fast);
-}
-
-.nav-item:hover,
-.nav-item.active {
-  color: #0b1728;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
-}
-
-.arrow-down {
-  font-size: 0.72rem;
-  opacity: 0.75;
-}
-
-/* Center Downward Triangle Jet Logo (Exact match to screenshot) */
-.jet-center-crest {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 90px;
-  z-index: 70;
-  cursor: pointer;
-}
-
-.crest-triangle {
-  width: 100%;
-  height: 100%;
-  background: #182232;
-  background: linear-gradient(180deg, #1f2b3e 0%, #131a26 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 24px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  transition: transform var(--transition-fast);
-}
-
-.crest-triangle:hover {
-  transform: scale(1.03);
-}
-
-.crest-text {
-  font-family: 'Caveat', 'Playfair Display', cursive, sans-serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #f1f5f9;
-  letter-spacing: -0.01em;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.plane-glyph {
-  font-size: 1.4rem;
-  margin-top: -8px;
-  display: inline-block;
-}
-
-/* 3. HERO AIRPLANE SECTION */
-.hero-airplane-section {
-  position: relative;
-  width: 100%;
-  height: 480px;
-  overflow: hidden;
-  background: #0f1624;
-}
-
-.hero-image-wrapper {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 38%;
-  display: block;
-}
-
-.hero-overlay-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(14, 20, 31, 0.2) 0%,
-    transparent 40%,
-    rgba(14, 20, 31, 0.85) 90%,
-    #0e141f 100%
-  );
-  pointer-events: none;
-}
-
-/* Navigation Arrows (< and > on hero, matching screenshot) */
-.hero-nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(22, 29, 41, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  backdrop-filter: blur(4px);
-  transition: all var(--transition-fast);
-}
-
-.hero-nav-arrow:hover {
-  background: rgba(22, 29, 41, 0.95);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.arrow-prev {
-  left: 28px;
-}
-
-.arrow-next {
-  right: 28px;
-}
-
-/* Hero Badge Overlay (DOMIER / 46.000 USD / Spain, Madrid) */
-.hero-badge-overlay {
-  position: absolute;
-  left: 5%;
-  bottom: 80px;
-  z-index: 10;
-  background: rgba(26, 35, 49, 0.88);
-  backdrop-filter: blur(8px);
-  border-left: 4px solid var(--color-gold);
-  border-radius: 4px;
-  padding: 16px 24px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 380px;
-}
-
-.badge-title-box {
-  display: inline-block;
-}
-
-.aircraft-model {
-  background: #ffffff;
-  color: #121926;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  padding: 4px 12px;
-  text-transform: uppercase;
-  border-radius: 2px;
-  display: inline-block;
-}
-
-.badge-price-box {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.price-value {
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-}
-
-.location-name {
-  font-size: 0.92rem;
-  color: #cbd5e1;
-}
-
-/* 4. TWO-TAB INTERFACE NAVIGATION STRIP */
-.aviation-tabs-strip {
-  background: #141c2b;
-  border-bottom: 1px solid var(--border-subtle);
-  position: sticky;
-  top: 0;
-  z-index: 45;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-.tabs-inner-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  display: flex;
-  gap: 12px;
-  padding: 10px 24px;
-}
-
-.aero-tab-btn {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
   gap: 14px;
   cursor: pointer;
   transition: all var(--transition-normal);
   color: #94a3b8;
   position: relative;
+}
+
+.tab-glass-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.tab-glass-btn.active {
+  background: linear-gradient(135deg, rgba(22, 33, 52, 0.95), rgba(16, 23, 36, 0.9));
+  border-color: rgba(229, 179, 88, 0.5);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), inset 0 0 15px rgba(229, 179, 88, 0.12);
+}
+
+.tab-btn-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tab-glass-btn svg {
+  color: #94a3b8;
+  transition: color var(--transition-fast);
+}
+
+.tab-glass-btn.active svg {
+  color: var(--color-gold);
+}
+
+.tab-titles {
+  display: flex;
+  flex-direction: column;
   text-align: left;
 }
 
-.aero-tab-btn:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.07);
-  color: #ffffff;
-}
-
-.aero-tab-btn.active {
-  background: linear-gradient(135deg, #1e2c44, #182235);
-  border-color: var(--color-gold);
-  color: #ffffff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 0 12px rgba(229, 179, 88, 0.1);
-}
-
-.tab-icon-wrap {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: #cbd5e1;
-  transition: all var(--transition-fast);
-}
-
-.aero-tab-btn.active .tab-icon-wrap {
-  background: var(--color-gold);
-  color: #121926;
-}
-
-.tab-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.tab-number {
-  font-size: 0.68rem;
+.tab-num {
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   font-weight: 700;
   color: var(--color-gold);
-  text-transform: uppercase;
 }
 
-.tab-label {
-  font-size: 0.98rem;
+.tab-name {
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
-.manifest-count-badge {
-  margin-left: auto;
-  background: rgba(255, 255, 255, 0.08);
+.badge-count-pill {
+  background: rgba(255, 255, 255, 0.1);
   color: #e2e8f0;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: 9999px;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.aero-tab-btn.active .manifest-count-badge {
-  background: rgba(229, 179, 88, 0.2);
-  color: #fde68a;
-  border: 1px solid rgba(229, 179, 88, 0.4);
+.tab-glass-btn.active .badge-count-pill {
+  background: var(--color-gold);
+  color: #121926;
 }
 
-.edit-pill {
-  margin-left: auto;
-  background: rgba(245, 158, 11, 0.2);
+.badge-edit-pill {
+  background: rgba(245, 158, 11, 0.25);
   color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  padding: 4px 10px;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  padding: 5px 12px;
   border-radius: 9999px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-/* 5. MAIN CONTENT TAB PANELS */
-.portal-main-body {
-  flex: 1;
+/* CONTENT PANELS BLENDED CONTAINER */
+.blended-content-card {
   width: 100%;
-  padding: 36px 0 60px;
 }
 
-.content-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.tab-content-panel {
+.tab-fade {
   animation: fadeIn 0.25s ease-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* 6. AVIATION LUXURY FOOTER */
-.aviation-footer {
-  background: #0b1019;
-  border-top: 1px solid #1f2b3e;
-  padding: 50px 0 24px;
-  color: #94a3b8;
-  font-size: 0.88rem;
-}
-
-.footer-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.2fr;
-  gap: 36px;
-}
-
-@media (max-width: 900px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 580px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.footer-brand p {
-  line-height: 1.6;
-  margin-top: 14px;
-  max-width: 380px;
-  color: #94a3b8;
-}
-
-.crest-text-sm {
-  font-family: 'Caveat', 'Playfair Display', cursive, sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #e5b358;
-}
-
-.footer-col h4 {
-  color: #ffffff;
-  font-size: 0.95rem;
-  margin-bottom: 14px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.footer-col ul li {
-  color: #94a3b8;
-  font-size: 0.86rem;
-}
-
-.footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 20px;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #64748b;
 }
 
 /* Toast Container */
 .toast-container {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   max-width: 440px;
-  width: calc(100% - 40px);
+  width: calc(100% - 48px);
 }
 
 .toast {
@@ -600,12 +279,12 @@
 }
 
 .toast-success {
-  background: rgba(16, 185, 129, 0.96);
+  background: rgba(16, 185, 129, 0.95);
   color: #ffffff;
 }
 
 .toast-error {
-  background: rgba(239, 68, 68, 0.96);
+  background: rgba(239, 68, 68, 0.95);
   color: #ffffff;
 }
 
@@ -618,12 +297,12 @@
   cursor: pointer;
 }
 
-/* API Config Modal */
+/* Config Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -632,7 +311,7 @@
 }
 
 .modal-card {
-  background: #162032;
+  background: #151f30;
   border: 1px solid #2d3c59;
   border-radius: var(--radius-xl);
   max-width: 500px;
@@ -771,46 +450,8 @@
   background: var(--color-gold-hover);
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-  .left-links {
-    padding-right: 40px;
-  }
-  .right-links {
-    padding-left: 40px;
-  }
-  .hero-airplane-section {
-    height: 380px;
-  }
-}
-
-@media (max-width: 720px) {
-  .jet-center-crest {
-    width: 90px;
-    height: 70px;
-  }
-  .crest-text {
-    font-size: 1.6rem;
-  }
-  .nav-links {
-    gap: 12px;
-  }
-  .left-links {
-    padding-right: 20px;
-  }
-  .right-links {
-    padding-left: 20px;
-  }
-  .nav-item {
-    font-size: 0.78rem;
-  }
-  .hero-badge-overlay {
-    bottom: 30px;
-    left: 20px;
-    right: 20px;
-    max-width: none;
-  }
-  .hero-airplane-section {
-    height: 320px;
+@media (max-width: 680px) {
+  .blended-tabs-nav {
+    flex-direction: column;
   }
 }
