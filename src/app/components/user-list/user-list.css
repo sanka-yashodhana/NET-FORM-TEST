@@ -1,7 +1,7 @@
 .list-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 /* Top Controls Card */
@@ -9,7 +9,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 18px 24px;
+  padding: 20px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,7 +41,7 @@
   background-color: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 12px 40px 12px 44px;
+  padding: 13px 40px 13px 44px;
   color: var(--text-main);
   font-size: 0.92rem;
   outline: none;
@@ -49,9 +49,9 @@
 }
 
 .search-input:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-  background-color: #1e293b;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(229, 179, 88, 0.2);
+  background-color: #121926;
 }
 
 .clear-search-btn {
@@ -77,8 +77,8 @@
 }
 
 .results-badge {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(229, 179, 88, 0.08);
+  border: 1px solid rgba(229, 179, 88, 0.25);
   padding: 8px 14px;
   border-radius: var(--radius-md);
   display: flex;
@@ -88,8 +88,8 @@
 
 .count-num {
   font-weight: 700;
-  color: #818cf8;
-  font-size: 1.05rem;
+  color: var(--color-gold);
+  font-size: 1.1rem;
 }
 
 .count-label {
@@ -101,7 +101,7 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #e2e8f0;
-  padding: 9px 14px;
+  padding: 10px 16px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -142,7 +142,7 @@
   background: transparent;
   border: none;
   color: #64748b;
-  padding: 6px 10px;
+  padding: 7px 11px;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
@@ -152,8 +152,8 @@
 }
 
 .toggle-btn.active {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-gold);
+  color: #121926;
 }
 
 /* Loading State */
@@ -172,8 +172,8 @@
 .pulse-loader {
   width: 44px;
   height: 44px;
-  border: 3px solid rgba(99, 102, 241, 0.2);
-  border-top-color: var(--color-primary);
+  border: 3px solid rgba(229, 179, 88, 0.2);
+  border-top-color: var(--color-gold);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -195,8 +195,8 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  color: #64748b;
+  background: rgba(229, 179, 88, 0.1);
+  color: var(--color-gold);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,24 +204,24 @@
 }
 
 .empty-state h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--text-main);
 }
 
 .empty-state p {
   color: var(--text-muted);
   font-size: 0.9rem;
-  max-width: 450px;
+  max-width: 460px;
 }
 
 .btn-clear, .btn-add-now {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-gold);
+  color: #121926;
   border: none;
-  padding: 9px 18px;
+  padding: 10px 20px;
   border-radius: var(--radius-md);
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   margin-top: 8px;
 }
@@ -286,8 +286,8 @@
 }
 
 .user-avatar {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   color: #fff;
   font-weight: 700;
@@ -311,7 +311,7 @@
 }
 
 .user-fullname {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-main);
 }
 
@@ -423,13 +423,13 @@
 }
 
 .btn-edit {
-  background: rgba(99, 102, 241, 0.12);
-  color: #a5b4fc;
-  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(229, 179, 88, 0.15);
+  color: var(--color-gold);
+  border-color: rgba(229, 179, 88, 0.35);
 }
 
 .btn-edit:hover {
-  background: rgba(99, 102, 241, 0.25);
+  background: rgba(229, 179, 88, 0.28);
   color: #fff;
 }
 
@@ -455,7 +455,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 22px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -465,7 +465,7 @@
 
 .user-card:hover {
   transform: translateY(-2px);
-  border-color: #475569;
+  border-color: var(--color-gold);
 }
 
 .card-top {
@@ -479,13 +479,13 @@
 }
 
 .card-header-meta h4 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-main);
 }
 
 .card-email {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
@@ -542,7 +542,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px;
+  padding: 10px;
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   font-weight: 600;
@@ -552,13 +552,13 @@
 }
 
 .btn-card-edit {
-  background: rgba(99, 102, 241, 0.12);
-  color: #a5b4fc;
-  border-color: rgba(99, 102, 241, 0.3);
+  background: rgba(229, 179, 88, 0.15);
+  color: var(--color-gold);
+  border-color: rgba(229, 179, 88, 0.35);
 }
 
 .btn-card-edit:hover {
-  background: rgba(99, 102, 241, 0.25);
+  background: rgba(229, 179, 88, 0.28);
   color: #fff;
 }
 
@@ -576,12 +576,9 @@
 /* Delete Confirmation Modal */
 .modal-backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -590,8 +587,8 @@
 }
 
 .modal-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: #162032;
+  border: 1px solid #2d3c59;
   border-radius: var(--radius-xl);
   max-width: 440px;
   width: 100%;

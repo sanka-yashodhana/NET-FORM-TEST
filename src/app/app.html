@@ -1,6 +1,6 @@
-<div class="app-layout">
-  
-  <!-- Global Toast Alerts -->
+<div class="aviation-portal">
+
+  <!-- Toast Notification Alerts -->
   <div class="toast-container" *ngIf="userService.successMessage() || userService.errorMessage()">
     <div *ngIf="userService.successMessage()" class="toast toast-success">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -22,124 +22,279 @@
     </div>
   </div>
 
-  <!-- Header Navigation Bar -->
-  <header class="app-header">
-    <div class="header-container">
-      <div class="brand-group">
-        <div class="brand-logo">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-            <polyline points="2 17 12 22 22 17"></polyline>
-            <polyline points="2 12 12 17 22 12"></polyline>
+  <!-- 1. TOP HEADER BAR WITH CONTACT & SOCIAL INFO (Matches reference screenshot) -->
+  <div class="top-utility-bar">
+    <div class="utility-container">
+      
+      <!-- Left Contacts -->
+      <div class="utility-left">
+        <a href="tel:+0885760904950" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.4 11.4 0 0 0 3.58.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.58 1 1 0 0 1-.25 1.02l-2.2 2.19z"></path>
           </svg>
-        </div>
-        <div class="brand-titles">
-          <h1>Enterprise User Hub</h1>
-          <span class="brand-subtitle">Angular Reactive Forms &amp; .NET REST API</span>
-        </div>
+          <span>+088 576-090-4950</span>
+        </a>
+        <a href="mailto:example@example.com" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"></path>
+          </svg>
+          <span>example@example.com</span>
+        </a>
       </div>
 
-      <!-- API Status & Config Trigger -->
-      <div class="header-actions">
+      <!-- Right Location, Social Icons & API Status -->
+      <div class="utility-right">
+        
+        <!-- .NET API Status badge -->
         <button
           type="button"
-          class="api-status-btn"
+          class="api-status-badge"
           [class.connected]="userService.isApiConnected()"
           [class.fallback]="userService.isUsingLocalFallback()"
           (click)="openApiConfig()"
-          title="Click to configure .NET API Endpoint"
+          title="Configure .NET API Endpoint URL"
         >
-          <span class="status-indicator"></span>
-          <div class="status-labels">
-            <span class="status-text">
-              {{ userService.isApiConnected() ? '.NET API Online' : 'Local Persistence Mode' }}
-            </span>
-            <span class="status-url">{{ userService.apiUrl() }}</span>
-          </div>
-          <svg class="gear-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <span class="status-dot"></span>
+          <span class="status-name">{{ userService.isApiConnected() ? '.NET API Online' : 'Local Cache Mode' }}</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
         </button>
+
+        <span class="location-text">New York, Franklin St. 29</span>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+          <span class="soc-icon" title="Twitter / X">𝕏</span>
+          <span class="soc-icon" title="Facebook">f</span>
+          <span class="soc-icon" title="LinkedIn">in</span>
+          <span class="soc-icon" title="YouTube">▶</span>
+          <span class="soc-icon" title="Instagram">📷</span>
+          <span class="soc-icon" title="Google Plus">G+</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN NAVIGATION BAR WITH CENTER JET TRIANGLE LOGO -->
+  <nav class="jet-main-nav">
+    <div class="nav-container">
+      
+      <!-- Left Navigation Items -->
+      <ul class="nav-links left-links">
+        <li>
+          <a class="nav-item" [class.active]="userService.activeTab() === 'form'" (click)="userService.setActiveTab('form')">
+            HOME
+          </a>
+        </li>
+        <li class="dropdown-link">
+          <a class="nav-item" (click)="userService.setActiveTab('list')">
+            VEHICLE MANAGER <span class="arrow-down">▾</span>
+          </a>
+        </li>
+        <li class="dropdown-link">
+          <a class="nav-item" (click)="userService.setActiveTab('form')">
+            AGENTS <span class="arrow-down">▾</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Center Iconic Downward-Pointing Jet Triangle Crest -->
+      <div class="jet-center-crest" (click)="userService.setActiveTab('form')" title="JET Aviation Portal">
+        <div class="crest-triangle">
+          <span class="crest-text">Jet<span class="plane-glyph">✈</span></span>
+        </div>
+      </div>
+
+      <!-- Right Navigation Items -->
+      <ul class="nav-links right-links">
+        <li class="dropdown-link">
+          <a class="nav-item">
+            ELEMENTS <span class="arrow-down">▾</span>
+          </a>
+        </li>
+        <li class="dropdown-link">
+          <a class="nav-item">
+            PAGES <span class="arrow-down">▾</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" (click)="openApiConfig()">
+            CONTACT US
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- 3. HERO AEROPLANE BANNER SECTION -->
+  <header class="hero-airplane-section">
+    <div class="hero-image-wrapper">
+      <img src="/jet_hero.jpg" alt="Aero Jet in Flight at Sunset" class="hero-bg-img" />
+      <div class="hero-overlay-gradient"></div>
+    </div>
+
+    <!-- Left & Right Carousel Navigation Arrows (as in screenshot) -->
+    <button type="button" class="hero-nav-arrow arrow-prev" title="Previous Aircraft">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    
+    <button type="button" class="hero-nav-arrow arrow-next" title="Next Aircraft">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <!-- Overlay Info Card (DOMIER / Price / Destination) from screenshot -->
+    <div class="hero-badge-overlay">
+      <div class="badge-title-box">
+        <span class="aircraft-model">DOMIER</span>
+      </div>
+      <div class="badge-price-box">
+        <span class="price-value">46.000 USD</span>
+        <span class="location-name">Spain, Madrid</span>
       </div>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="main-content">
-    
-    <!-- TWO-TAB NAVIGATION BAR -->
-    <nav class="tabs-nav-bar" aria-label="Main Navigation">
+  <!-- 4. TWO-TAB INTERFACE NAVIGATION STRIP -->
+  <div class="aviation-tabs-strip">
+    <div class="tabs-inner-container">
       
-      <!-- Tab 1: Registration Form -->
+      <!-- Tab 1 Button: Passenger Registration Form -->
       <button
         type="button"
-        class="tab-btn"
+        class="aero-tab-btn"
         [class.active]="userService.activeTab() === 'form'"
         (click)="userService.setActiveTab('form')"
       >
-        <div class="tab-btn-content">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        <div class="tab-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <line x1="19" y1="8" x2="19" y2="14"></line>
+            <line x1="22" y1="11" x2="16" y2="11"></line>
           </svg>
-          <span class="tab-title">Tab 1: Registration Form</span>
         </div>
-        <span *ngIf="userService.selectedUserForEdit()" class="tab-pill-badge edit">
-          Editing ID #{{ userService.selectedUserForEdit()?.id }}
+        <div class="tab-info">
+          <span class="tab-number">TAB 01</span>
+          <span class="tab-label">Passenger Registration Form</span>
+        </div>
+        <span *ngIf="userService.selectedUserForEdit()" class="edit-pill">
+          Editing Record #{{ userService.selectedUserForEdit()?.id }}
         </span>
       </button>
 
-      <!-- Tab 2: User Records / Data View -->
+      <!-- Tab 2 Button: Passenger Manifest Directory -->
       <button
         type="button"
-        class="tab-btn"
+        class="aero-tab-btn"
         [class.active]="userService.activeTab() === 'list'"
         (click)="userService.setActiveTab('list')"
       >
-        <div class="tab-btn-content">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="tab-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
-          <span class="tab-title">Tab 2: User Records &amp; Directory</span>
         </div>
-        <span class="tab-pill-badge count">
-          {{ userService.users().length }}
+        <div class="tab-info">
+          <span class="tab-number">TAB 02</span>
+          <span class="tab-label">Flight Manifest &amp; Records</span>
+        </div>
+        <span class="manifest-count-badge">
+          {{ userService.users().length }} Passengers
         </span>
       </button>
 
-    </nav>
+    </div>
+  </div>
 
-    <!-- TAB 1 CONTENT -->
-    <section *ngIf="userService.activeTab() === 'form'" class="tab-panel">
-      <app-user-form></app-user-form>
-    </section>
+  <!-- 5. MAIN CONTENT TAB PANELS -->
+  <main class="portal-main-body">
+    <div class="content-container">
 
-    <!-- TAB 2 CONTENT -->
-    <section *ngIf="userService.activeTab() === 'list'" class="tab-panel">
-      <app-user-list></app-user-list>
-    </section>
+      <!-- TAB 1: REACTIVE FORM COMPONENT -->
+      <section *ngIf="userService.activeTab() === 'form'" class="tab-content-panel">
+        <app-user-form></app-user-form>
+      </section>
 
+      <!-- TAB 2: USER LIST / MANIFEST COMPONENT -->
+      <section *ngIf="userService.activeTab() === 'list'" class="tab-content-panel">
+        <app-user-list></app-user-list>
+      </section>
+
+    </div>
   </main>
 
-  <!-- MODAL: API URL CONFIGURATION -->
+  <!-- 6. AVIATION LUXURY FOOTER -->
+  <footer class="aviation-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <div class="footer-crest">
+            <span class="crest-text-sm">Jet✈</span>
+          </div>
+          <p>Global Luxury Charter &amp; Aviation Enterprise. Operating VIP transcontinental routes and crew management with modern .NET &amp; Angular solutions.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Aviation Hub</h4>
+          <ul>
+            <li>Private Jet Fleet</li>
+            <li>Charter Routes</li>
+            <li>VIP Lounge Services</li>
+            <li>Flight Operations</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Rest API Specs</h4>
+          <ul>
+            <li>GET /api/users (Manifest)</li>
+            <li>POST /api/users (Passenger)</li>
+            <li>PUT /api/users/{{'{id}'}} (Update)</li>
+            <li>DELETE /api/users/{{'{id}'}} (Purge)</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Headquarters</h4>
+          <p>Franklin Street 29, Manhattan, NY</p>
+          <p>Phone: +088 576-090-4950</p>
+          <p>Email: example@example.com</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 JET™ Aviation Corporation. All rights reserved. Built with Angular &amp; .NET Core REST API.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- API CONFIGURATION MODAL -->
   <div *ngIf="isApiConfigOpen()" class="modal-backdrop" (click)="closeApiConfig()">
     <div class="modal-card config-modal" (click)="$event.stopPropagation()">
       <div class="config-modal-header">
         <div class="config-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-            <line x1="6" y1="6" x2="6.01" y2="6"></line>
-            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
           </svg>
         </div>
         <div>
-          <h3>.NET API Endpoint Configuration</h3>
-          <p class="config-sub">Configure the REST API base URL for POST, GET, PUT &amp; DELETE operations</p>
+          <h3>.NET Aviation API Endpoint</h3>
+          <p class="config-sub">Configure the REST API endpoint URL for passenger registration &amp; manifest</p>
         </div>
       </div>
 
@@ -156,7 +311,7 @@
       </div>
 
       <div class="presets-section">
-        <span class="presets-label">Common Localhost Presets:</span>
+        <span class="presets-label">Common Presets:</span>
         <div class="presets-pills">
           <button type="button" class="preset-pill" (click)="resetApiToDefault('http://localhost:5000/api/users')">
             http://localhost:5000/api/users
@@ -168,12 +323,6 @@
             http://localhost:5242/api/users
           </button>
         </div>
-      </div>
-
-      <div class="config-note">
-        <p>
-          💡 <strong>Offline / Standalone Support:</strong> If your .NET API is not currently running, the app automatically runs in local storage simulation mode, so all features (Form validation, POST, GET, Edit, Delete, Search) are 100% functional for evaluation.
-        </p>
       </div>
 
       <div class="modal-actions">

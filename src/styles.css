@@ -1,44 +1,47 @@
-/* Modern Enterprise Design System */
+/* Luxury Aviation & Jet Interface Design System */
 :root {
   --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Playfair Display', Georgia, serif;
 
-  /* Color Palette - Vibrant Indigo & Slate */
-  --color-primary: #6366f1;
-  --color-primary-hover: #4f46e5;
-  --color-primary-light: #e0e7ff;
-  --color-primary-glow: rgba(99, 102, 241, 0.25);
+  /* Aviation Color Palette */
+  --color-jet-dark: #121926;
+  --color-jet-navy: #1b2537;
+  --color-jet-slate: #243048;
+  --color-ice-blue: #d4e3f0;
+  --color-ice-blue-hover: #c4d7e8;
+  --color-gold: #e5b358;
+  --color-gold-hover: #d4a043;
+  --color-gold-glow: rgba(229, 179, 88, 0.35);
 
-  --color-secondary: #0ea5e9;
-  --color-accent: #8b5cf6;
+  --color-primary: #1e3a8a;
+  --color-primary-hover: #1e40af;
+  --color-accent: #0284c7;
   --color-success: #10b981;
-  --color-success-bg: #ecfdf5;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
-  --color-danger-bg: #fef2f2;
 
   /* Surfaces & Backgrounds */
-  --bg-app: #0b0f19;
-  --bg-card: #111827;
-  --bg-card-secondary: #1a2234;
-  --bg-input: #1e293b;
-  --border-subtle: #334155;
-  --border-focus: #818cf8;
+  --bg-app: #0e141f;
+  --bg-card: #162032;
+  --bg-card-secondary: #1d2a42;
+  --bg-input: #101726;
+  --border-subtle: #2d3c59;
+  --border-focus: #e5b358;
 
   /* Typography */
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --text-inverse: #0f172a;
+  --text-dark: #1e293b;
 
-  /* Shadows & Radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.35);
+  /* Radius & Shadows */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
 
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -57,29 +60,25 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.1) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
-  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 input, button, select, textarea {
   font-family: inherit;
 }
 
-/* Scrollbar customization */
+/* Custom aeronautical scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #0b1019;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #2b3952;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #3b4d6e;
 }
